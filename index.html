@@ -2,22 +2,35 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Undangan Pernikahan</title>
   <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
-    h1 { color: #c0392b; }
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 80px;
+    }
+    h1 {
+      font-size: 2.5em;
+    }
+    .nama {
+      color: #e91e63;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>Undangan Pernikahan</h1>
-  <p>Selamat datang, <strong id="nama-tamu">Tamu</strong>!</p>
-  <p>Kami mengundang Anda untuk hadir di acara pernikahan kami pada <strong>20 Desember 2025</strong>.</p>
+  <h1>Selamat datang, <span class="nama" id="nama">Tamu</span>!</h1>
+  <p>Anda diundang ke acara pernikahan kami pada <strong>20 Desember 2025</strong>.</p>
 
   <script>
-    const subdomain = window.location.hostname.split('.')[0];
-    const nama = subdomain.charAt(0).toUpperCase() + subdomain.slice(1);
-    document.getElementById('nama-tamu').innerText = decodeURIComponent(nama);
+    // Ambil nama tamu dari parameter URL
+    const params = new URLSearchParams(window.location.search);
+    const tamu = params.get("tamu");
+    if (tamu) {
+      const namaTamu = tamu.charAt(0).toUpperCase() + tamu.slice(1);
+      document.getElementById("nama").innerText = decodeURIComponent(namaTamu);
+    }
   </script>
 </body>
 </html>
