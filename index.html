@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Undangan Pernikahan</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    h1 { color: #c0392b; }
+  </style>
+</head>
+<body>
+  <h1>Undangan Pernikahan</h1>
+  <p>Selamat datang, <strong id="nama-tamu">Tamu</strong>!</p>
+  <p>Kami mengundang Anda untuk hadir di acara pernikahan kami pada <strong>20 Desember 2025</strong>.</p>
+
+  <script>
+    const subdomain = window.location.hostname.split('.')[0];
+    const nama = subdomain.charAt(0).toUpperCase() + subdomain.slice(1);
+    document.getElementById('nama-tamu').innerText = decodeURIComponent(nama);
+  </script>
+</body>
+</html>
