@@ -445,6 +445,206 @@
       opacity: 1;
     }
 
+    /* Modal RSVP */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #8c6d5e;
+      transition: transform 0.3s ease;
+    }
+
+    .close-modal:hover {
+      transform: rotate(90deg);
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #8c6d5e;
+      font-size: 1.8rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #5a4a42;
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #e8dfd4;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus, 
+    .form-group select:focus {
+      border-color: #8c6d5e;
+      outline: none;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .attendance-options {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .attendance-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .attendance-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      background: #f8f4e9;
+      border: 2px solid #e8dfd4;
+      transition: all 0.3s ease;
+    }
+
+    .attendance-circle i {
+      font-size: 2rem;
+      color: #a68b7c;
+    }
+
+    .attendance-option.selected .attendance-circle {
+      background: #8c6d5e;
+      border-color: #8c6d5e;
+    }
+
+    .attendance-option.selected i {
+      color: white;
+    }
+
+    .attendance-option span {
+      font-weight: 500;
+      color: #5a4a42;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: #8c6d5e;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background: #a68b7c;
+      transform: translateY(-2px);
+    }
+
+    .success-message {
+      text-align: center;
+      padding: 2rem;
+      display: none;
+    }
+
+    .success-message i {
+      font-size: 4rem;
+      color: #4CAF50;
+      margin-bottom: 1.5rem;
+      animation: bounce 1s ease;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-20px);}
+      60% {transform: translateY(-10px);}
+    }
+
+    .success-message h2 {
+      font-family: 'Playfair Display', serif;
+      color: #8c6d5e;
+      margin-bottom: 1rem;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #8c6d5e;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     @media (max-width: 768px) {
       .couple-names {
         font-size: 2.5rem;
@@ -478,6 +678,11 @@
         top: 70px;
         right: 15px;
       }
+      
+      .attendance-options {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
@@ -498,11 +703,76 @@
   
   <div class="audio-info" id="audioInfo">Musik latar aktif</div>
 
+  <!-- Modal RSVP -->
+  <div class="modal" id="rsvpModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      
+      <div id="rsvpForm">
+        <h2 class="modal-title">Konfirmasi Kehadiran</h2>
+        
+        <div class="form-group">
+          <label for="guestName">Nama Tamu</label>
+          <input type="text" id="guestName" readonly>
+        </div>
+        
+        <div class="form-group">
+          <label for="guestCount">Jumlah Orang yang Hadir</label>
+          <select id="guestCount">
+            <option value="1">1 Orang</option>
+            <option value="2" selected>2 Orang</option>
+            <option value="3">3 Orang</option>
+            <option value="4">4 Orang</option>
+            <option value="5">5 Orang</option>
+            <option value="6">Lebih dari 5 Orang</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Konfirmasi Kehadiran</label>
+          <div class="attendance-options">
+            <div class="attendance-option" data-value="Hadir">
+              <div class="attendance-circle">
+                <i class="fas fa-check"></i>
+              </div>
+              <span>Hadir</span>
+            </div>
+            <div class="attendance-option" data-value="Tidak Hadir">
+              <div class="attendance-circle">
+                <i class="fas fa-times"></i>
+              </div>
+              <span>Tidak Hadir</span>
+            </div>
+          </div>
+          <input type="hidden" id="attendanceStatus" value="Hadir">
+        </div>
+        
+        <div class="form-group">
+          <label for="guestMessage">Pesan/Ucapan (opsional)</label>
+          <textarea id="guestMessage" placeholder="Tulis pesan atau ucapan Anda..."></textarea>
+        </div>
+        
+        <button class="submit-btn" id="submitRsvp">Kirim Konfirmasi</button>
+      </div>
+      
+      <div class="loading" id="loadingIndicator">
+        <div class="loading-spinner"></div>
+        <p>Mengirim konfirmasi...</p>
+      </div>
+      
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <h2>Konfirmasi Berhasil Dikirim!</h2>
+        <p>Terima kasih atas konfirmasi kehadiran Anda. Doa restu Anda sangat berarti bagi kami.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="header">
       <div class="floral-border"></div>
       <div class="subtitle">Kami Berbahagia Mengundang Anda</div>
-      <h1 class="couple-names">Firdaus & Anindita</h1>
+      <h1 class="couple-names">Aldi & Adilla</h1>
       <div class="subtitle">Dalam Rangka Pernikahan Kami</div>
     </div>
 
@@ -667,11 +937,6 @@
       isPlaying = !isPlaying;
     });
     
-    // RSVP button
-    document.getElementById("rsvpButton").addEventListener("click", function() {
-      alert(`Terima kasih ${namaTamu} atas konfirmasi kehadirannya! Doa restu Anda sangat berarti bagi kami.`);
-    });
-    
     // Create floating petals
     function createPetals() {
       const container = document.getElementById('petalsContainer');
@@ -706,6 +971,127 @@
     }
     
     createPetals();
+
+    // RSVP Modal Functionality
+    const rsvpButton = document.getElementById("rsvpButton");
+    const rsvpModal = document.getElementById("rsvpModal");
+    const closeModal = document.getElementById("closeModal");
+    const guestNameInput = document.getElementById("guestName");
+    const attendanceOptions = document.querySelectorAll(".attendance-option");
+    const attendanceStatus = document.getElementById("attendanceStatus");
+    const submitRsvp = document.getElementById("submitRsvp");
+    const rsvpForm = document.getElementById("rsvpForm");
+    const loadingIndicator = document.getElementById("loadingIndicator");
+    const successMessage = document.getElementById("successMessage");
+
+    // Set guest name in form
+    guestNameInput.value = namaTamu;
+
+    // Open modal
+    rsvpButton.addEventListener("click", function() {
+      rsvpModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    });
+
+    // Close modal
+    closeModal.addEventListener("click", function() {
+      rsvpModal.style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener("click", function(event) {
+      if (event.target === rsvpModal) {
+        rsvpModal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    });
+
+    // Attendance selection
+    attendanceOptions.forEach(option => {
+      option.addEventListener("click", function() {
+        // Remove selected class from all options
+        attendanceOptions.forEach(opt => opt.classList.remove("selected"));
+        
+        // Add selected class to clicked option
+        this.classList.add("selected");
+        
+        // Update hidden input value
+        attendanceStatus.value = this.getAttribute("data-value");
+      });
+    });
+
+    // Set default selection
+    document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
+
+    // Submit RSVP to Google Sheets
+    submitRsvp.addEventListener("click", function() {
+      const guestName = guestNameInput.value;
+      const attendance = attendanceStatus.value;
+      const guestCount = document.getElementById("guestCount").value;
+      const message = document.getElementById("guestMessage").value || "Tidak ada pesan";
+      
+      // Show loading indicator
+      rsvpForm.style.display = "none";
+      loadingIndicator.style.display = "block";
+      
+      // Simulate API call to Google Sheets
+      setTimeout(() => {
+        // In a real implementation, you would send data to Google Sheets here
+        console.log("Data yang akan dikirim ke Google Sheets:", {
+          nama: guestName,
+          kehadiran: attendance,
+          jumlah: guestCount,
+          pesan: message,
+          timestamp: new Date().toISOString()
+        });
+        
+        // Hide loading indicator and show success message
+        loadingIndicator.style.display = "none";
+        successMessage.style.display = "block";
+        
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          rsvpModal.style.display = "none";
+          document.body.style.overflow = "auto";
+          
+          // Reset form after closing
+          setTimeout(() => {
+            successMessage.style.display = "none";
+            rsvpForm.style.display = "block";
+            document.getElementById("guestCount").value = "2";
+            document.getElementById("guestMessage").value = "";
+            attendanceOptions.forEach(opt => opt.classList.remove("selected"));
+            document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
+            attendanceStatus.value = "Hadir";
+          }, 500);
+        }, 3000);
+      }, 2000);
+    });
+    
+    // In a real implementation, you would use:
+    
+    function submitToGoogleSheets(data) {
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzxOKmq1uLoqZYWDW6cYbGNvJoLj_-dpQ0PImlku0jEtdhhcBPeWafZxvDNnB_sd2UE/exec';
+      
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // Show success message
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Show error message
+      });
+    }
+    
   </script>
 </body>
 </html>
