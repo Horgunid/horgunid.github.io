@@ -1037,40 +1037,40 @@
       
       // Simulate API call to Google Sheets
       // Kirim data ke Google Sheets via Apps Script
-      submitToGoogleSheets({
-        nama: guestName,
-        kehadiran: attendance,
-        jumlah: guestCount,
-        pesan: message
-      });
+      
 
     // Simulate API call to Google Sheets
-    // setTimeout(() => {
-  
-    //     // Hide loading indicator and show success message
-    //     loadingIndicator.style.display = "none";
-    //     successMessage.style.display = "block";
+    setTimeout(() => {
+        submitToGoogleSheets({
+          nama: guestName,
+          kehadiran: attendance,
+          jumlah: guestCount,
+          pesan: message
+        });
+        // Hide loading indicator and show success message
+        loadingIndicator.style.display = "none";
+        successMessage.style.display = "block";
       
-    //     // Close modal after 3 seconds ...
+        // Close modal after 3 seconds ...
 
-    //     // Close modal after 3 seconds
-    //     setTimeout(() => {
-    //       rsvpModal.style.display = "none";
-    //       document.body.style.overflow = "auto";
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          rsvpModal.style.display = "none";
+          document.body.style.overflow = "auto";
           
-    //       // Reset form after closing
-    //       setTimeout(() => {
-    //         successMessage.style.display = "none";
-    //         rsvpForm.style.display = "block";
-    //         document.getElementById("guestCount").value = "2";
-    //         document.getElementById("guestMessage").value = "";
-    //         attendanceOptions.forEach(opt => opt.classList.remove("selected"));
-    //         document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
-    //         attendanceStatus.value = "Hadir";
-    //       }, 500);
-    //     }, 3000);
-    //   }, 2000);
-    // });
+          // Reset form after closing
+          setTimeout(() => {
+            successMessage.style.display = "none";
+            rsvpForm.style.display = "block";
+            document.getElementById("guestCount").value = "2";
+            document.getElementById("guestMessage").value = "";
+            attendanceOptions.forEach(opt => opt.classList.remove("selected"));
+            document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
+            attendanceStatus.value = "Hadir";
+          }, 500);
+        }, 3000);
+      }, 2000);
+    });
     
     // In a real implementation, you would use:
     
