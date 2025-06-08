@@ -1044,7 +1044,16 @@ submitToGoogleSheets({
   pesan: message
 });
 
-        
+        // Simulate API call to Google Sheets
+setTimeout(() => {
+  
+
+  // Hide loading indicator and show success message
+  loadingIndicator.style.display = "none";
+  successMessage.style.display = "block";
+
+  // Close modal after 3 seconds ...
+
         // Close modal after 3 seconds
         setTimeout(() => {
           rsvpModal.style.display = "none";
