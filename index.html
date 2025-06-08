@@ -1037,29 +1037,65 @@
       
       // Simulate API call to Google Sheets
       // Kirim data ke Google Sheets via Apps Script
-submitToGoogleSheets({
-  nama: guestName,
-  kehadiran: attendance,
-  jumlah: guestCount,
-  pesan: message
-});
+      submitToGoogleSheets({
+        nama: guestName,
+        kehadiran: attendance,
+        jumlah: guestCount,
+        pesan: message
+      });
 
-        // Simulate API call to Google Sheets
-setTimeout(() => {
+    // Simulate API call to Google Sheets
+    // setTimeout(() => {
   
+    //     // Hide loading indicator and show success message
+    //     loadingIndicator.style.display = "none";
+    //     successMessage.style.display = "block";
+      
+    //     // Close modal after 3 seconds ...
 
-  // Hide loading indicator and show success message
-  loadingIndicator.style.display = "none";
-  successMessage.style.display = "block";
-
-  // Close modal after 3 seconds ...
-
-        // Close modal after 3 seconds
+    //     // Close modal after 3 seconds
+    //     setTimeout(() => {
+    //       rsvpModal.style.display = "none";
+    //       document.body.style.overflow = "auto";
+          
+    //       // Reset form after closing
+    //       setTimeout(() => {
+    //         successMessage.style.display = "none";
+    //         rsvpForm.style.display = "block";
+    //         document.getElementById("guestCount").value = "2";
+    //         document.getElementById("guestMessage").value = "";
+    //         attendanceOptions.forEach(opt => opt.classList.remove("selected"));
+    //         document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
+    //         attendanceStatus.value = "Hadir";
+    //       }, 500);
+    //     }, 3000);
+    //   }, 2000);
+    // });
+    
+    // In a real implementation, you would use:
+    
+    function submitToGoogleSheets(data) {
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzejNozKjJGFjaP2g3h2VII1whGrde6mjFICuvUvr2D7OtpYttHv_OAmfRwE14DLhpakg/exec';
+    
+      const formData = new FormData();
+      formData.append('nama', data.nama);
+      formData.append('kehadiran', data.kehadiran);
+      formData.append('jumlah', data.jumlah);
+      formData.append('pesan', data.pesan || '');
+    
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log('Success:', result);
+        loadingIndicator.style.display = "none";
+        successMessage.style.display = "block";
+    
         setTimeout(() => {
           rsvpModal.style.display = "none";
           document.body.style.overflow = "auto";
-          
-          // Reset form after closing
           setTimeout(() => {
             successMessage.style.display = "none";
             rsvpForm.style.display = "block";
@@ -1070,51 +1106,14 @@ setTimeout(() => {
             attendanceStatus.value = "Hadir";
           }, 500);
         }, 3000);
-      }, 2000);
-    });
-    
-    // In a real implementation, you would use:
-    
-    function submitToGoogleSheets(data) {
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzejNozKjJGFjaP2g3h2VII1whGrde6mjFICuvUvr2D7OtpYttHv_OAmfRwE14DLhpakg/exec';
-
-  const formData = new FormData();
-  formData.append('nama', data.nama);
-  formData.append('kehadiran', data.kehadiran);
-  formData.append('jumlah', data.jumlah);
-  formData.append('pesan', data.pesan || '');
-
-  fetch(scriptURL, {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.text())
-  .then(result => {
-    console.log('Success:', result);
-    loadingIndicator.style.display = "none";
-    successMessage.style.display = "block";
-
-    setTimeout(() => {
-      rsvpModal.style.display = "none";
-      document.body.style.overflow = "auto";
-      setTimeout(() => {
-        successMessage.style.display = "none";
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        loadingIndicator.style.display = "none";
         rsvpForm.style.display = "block";
-        document.getElementById("guestCount").value = "2";
-        document.getElementById("guestMessage").value = "";
-        attendanceOptions.forEach(opt => opt.classList.remove("selected"));
-        document.querySelector('.attendance-option[data-value="Hadir"]').classList.add("selected");
-        attendanceStatus.value = "Hadir";
-      }, 500);
-    }, 3000);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    loadingIndicator.style.display = "none";
-    rsvpForm.style.display = "block";
-    alert("Gagal mengirim data. Silakan coba lagi.");
-  });
-}
+        alert("Gagal mengirim data. Silakan coba lagi.");
+      });
+    }
 
 
     
