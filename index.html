@@ -25,7 +25,7 @@
       --text-color: #f0e6d2; /* Krem terang untuk teks */
       --accent-gold: #c8a464; /* Emas untuk judul dan aksen */
       --card-bg: #5c243a; /* Warna solid Maroon (sedikit lebih terang) */
-      --border-color: rgba(200, 164, 100, 0.3);
+      --border-color: rgba(200,164,100,0.3);
       --card-alt-bg: #5c243a; /* Samakan agar konsisten */
 
     }
@@ -51,18 +51,50 @@
       /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a1d2e"/><path d="M11 11L89 89M89 11L11 89" stroke="%235c243a" stroke-width="0.5"/></svg>'); */
     }
     
-    /* Tambahan Ornamen Batik di Kanan */
+    /* Ganti ornamen batik dengan yang lebih elegan */
     body::after {
         content: '';
         position: fixed;
         top: 0;
         right: 0;
         height: 100%;
-        width: 80px; /* Lebar ornamen batik */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23c8a464' fill-opacity='0.4'%3E%3Cpath d='M80 40L40 80L0 40L40 0z M40 80L0 40V80H40z M40 0L80 40V0H40z'/%3E%3Cpath d='M30 50L50 30L70 50L50 70z M10 30L30 10L50 30L30 50z'/%3E%3C/g%3E%3C/svg%3E");
-        background-size: 80px 80px;
-        z-index: 0;
-        opacity: 0.3;
+        width: 100px; /* Sedikit lebih lebar */
+        background: linear-gradient(to right, transparent, var(--bg-color));
+    }
+
+    .side-ornament {
+        position: fixed;
+        top: 0;
+        right: 20px;
+        height: 100%;
+        width: 60px;
+        pointer-events: none;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px 0;
+    }
+
+    .ornament-motif {
+        width: 100%;
+        height: 200px;
+        /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0C30 20 40 30 60 30C40 30 30 40 30 60C30 40 20 30 0 30C20 30 30 20 30 0Z' fill='%23c8a464' fill-opacity='0.3'/%3E%3C/svg%3E"); */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.6;
+    }
+
+    .ornament-line {
+        width: 1px;
+        height: calc(100% - 500px); /* Sesuaikan dengan tinggi total ornament-motif */
+        background: linear-gradient(to bottom,
+            transparent,
+            var(--accent-gold),
+            transparent
+        );
+        margin: 0 auto;
     }
 
     .hidden-for-animation {
@@ -89,16 +121,16 @@
 
     /* --- Cover / Amplop Pembuka --- */
     #cover {
-      background: linear-gradient(rgba(74, 29, 46, 0.95), rgba(74, 29, 46, 0.95));
+      background: linear-gradient(135deg, 
+        rgba(74, 29, 46, 0.98) 0%,
+        rgba(74, 29, 46, 0.95) 100%);
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      z-index: 2000;
     }
     #cover.hidden { opacity: 0; visibility: hidden; }
     
@@ -113,20 +145,33 @@
       text-align: center;
       padding: 2rem;
       position: relative;
-      max-width: 600px;
+      max-width: 500px;
       width: 90%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem; /* Reduced from 1.5rem */
+      gap: 1.5rem;
     }
 
     .cover-content img {
-      width: 180px; /* Reduced from 250px */
+      width: 180px;
       height: auto;
-      margin-bottom: 0.5rem !important; /* Reduced from 1rem */
       opacity: 0.9;
-      filter: drop-shadow(0 0 20px rgba(200, 164, 100, 0.3));
+      filter: drop-shadow(0 0 15px rgba(200, 164, 100, 0.2));
+      animation: floatImage 3s ease-in-out infinite;
+    }
+
+    @keyframes floatImage {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Remove these styles if they exist */
+    .cover-content::before,
+    .cover-content::after,
+    #cover::before,
+    #cover::after {
+      display: none;
     }
 
     .cover-content h1 {
@@ -198,28 +243,127 @@
 #hero {
     position: relative;
     width: 100%;
-    height: 80vh; /* Tinggi header, bisa disesuaikan */
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: white; /* Teks di atas foto dibuat putih agar kontras */
+    color: var(--text-color);
+    background: var(--bg-color);
 }
+
 .hero-background {
     position: absolute;
     top: 0; left: 0;
     width: 100%;
     height: 100%;
-    /* GANTI URL GAMBAR DI SINI */
-    background-image: url('https://i.pinimg.com/736x/eb/78/ee/eb78eea9bf8c8e055c59ca249628bf69.jpg'); /* Ganti dengan link gambar Anda */
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.6); /* Meredupkan gambar agar teks terbaca */
-    z-index: -1;
+    opacity: 0.15;
+    /* Pattern batik minimalis */
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c8a464' stroke-width='1'%3E%3Cpath d='M0 0h80v80H0z'/%3E%3Cpath d='M40 0v80M0 40h80'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
 }
-.hero-content .subtitle { font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase;}
-.hero-content .couple-names { font-family: var(--primary-font); font-size: clamp(3rem, 10vw, 5rem); margin: 0.5rem 0;}
-.hero-content p { font-size: 1.2rem; }
+
+/* Tambah frame border elegan */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 4rem;
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Border frame elegan */
+.hero-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid var(--accent-gold);
+    pointer-events: none;
+}
+
+/* Ornamen sudut */
+.hero-content::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-top: 2px solid var(--accent-gold);
+    border-left: 2px solid var(--accent-gold);
+    top: 20px;
+    left: 20px;
+}
+
+.hero-content > *:not(.ornament) {
+    position: relative;
+    z-index: 2;
+}
+
+/* Tambah ornamen tradisional minimalis */
+.ornament {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.1;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23c8a464' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 30px 30px;
+}
+
+/* Update style untuk konten */
+.hero-content .subtitle {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+}
+
+.hero-content .couple-names {
+    font-family: var(--primary-font);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    line-height: 1.2;
+    margin: 1rem 0;
+    color: var(--accent-gold);
+}
+
+.hero-content .date {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-top: 1rem;
+}
+
+/* Tambah ornamen di section quotes */
+.message {
+    position: relative;
+    padding: 2rem;
+    border-left: 3px solid var(--accent-gold);
+    border-right: 3px solid var(--accent-gold);
+    margin: 2rem 0;
+}
+
+.message::before,
+.message::after {
+    content: '"';
+    font-family: var(--primary-font);
+    font-size: 4rem;
+    color: var(--accent-gold);
+    opacity: 0.3;
+    position: absolute;
+}
+
+.message::before {
+    top: -20px;
+    left: 10px;
+}
+
+.message::after {
+    bottom: -50px;
+    right: 10px;
+}
 
     /* --- Invitation Card & Sections --- */
     .invitation-card {
@@ -339,6 +483,151 @@
     .loading-spinner { width: 50px; height: 50px; border: 5px solid rgba(200,164,100,0.2); border-top: 5px solid var(--accent-gold); border-radius: 50%; margin: 0 auto 20px; animation: spin 1s linear infinite; }
     @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     .music-control { position: fixed; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; transition: all 0.4s ease; }
+
+    /* Update style animasi ambient */
+.ambient-animations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cloud {
+  position: absolute;
+  opacity: 0.15;
+  filter: contrast(0.8);
+  color: var(--accent-gold);
+}
+
+.cloud-1 {
+  width: 280px; /* Jauh lebih besar */
+  height: 100px;
+  top: 15%;
+  animation: floatCloud 60s linear infinite;
+}
+
+.cloud-2 {
+  width: 220px; /* Jauh lebih besar */
+  height: 80px;
+  top: 35%;
+  animation: floatCloud 45s linear infinite;
+  animation-delay: -20s;
+}
+
+.birds {
+  position: absolute;
+  width: 200px; /* Lebih besar */
+  height: 100px;
+  top: 25%;
+  left: -200px;
+  animation: flyBirds 30s linear infinite;
+  opacity: 0.2;
+  color: var(--accent-gold);
+}
+
+@keyframes floatCloud {
+  from {
+    left: -300px;
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(100px) translateY(20px);
+  }
+  to {
+    left: 100%;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes flyBirds {
+  from {
+    left: -200px;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2);
+  }
+  to {
+    left: 100%;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ganti frame bunga dengan motif batik yang lebih elegan */
+.floral-frame {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.frame-border {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 1px solid var(--accent-gold);
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.corner-ornament {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,0 L100,0 L100,10 C60,10 10,60 10,100 L0,100 Z' fill='%23c8a464' fill-opacity='0.2'/%3E%3Cpath d='M20,0 L80,0 C80,40 40,80 0,80 L0,20 Z' fill='%23c8a464' fill-opacity='0.1'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+    transform: rotate(90deg);
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    transform: rotate(-90deg);
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    transform: rotate(180deg);
+}
+
+.side-pattern {
+    position: fixed;
+    width: 30px;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 100'%3E%3Cpath d='M10,0 Q20,50 10,100 M0,0 Q10,50 0,100' stroke='%23c8a464' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    opacity: 0.15;
+}
+
+.left-pattern {
+    left: 20px;
+}
+
+.right-pattern {
+    right: 20px;
+    transform: scaleX(-1);
+}
+
   </style>
 </head>
 <body>
@@ -388,11 +677,11 @@
     <div class="container">
       <!-- HEADER BARU DENGAN FOTO -->
 <section id="hero">
-    <div class="hero-background"></div>
     <div class="hero-content">
+        <div class="ornament"></div>
         <p class="subtitle">The Wedding Of</p>
         <h1 class="couple-names">Dilla & Aldi</h1>
-        <p>Sabtu, 20 Desember 2025</p>
+        <p class="date">Sabtu, 20 Desember 2025</p>
     </div>
 </section>
 
@@ -465,6 +754,25 @@
   </main>
 
   <audio id="backgroundMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+
+  <div class="ambient-animations">
+    <svg class="cloud cloud-1" viewBox="0 0 100 40">
+      <path fill="currentColor" d="M10,30 C5,30 0,25 0,20 C0,15 5,10 10,10 C15,0 25,0 30,10 C35,5 45,5 50,10 C55,5 65,5 70,10 C75,0 85,0 90,10 C95,10 100,15 100,20 C100,25 95,30 90,30 Z"/>
+    </svg>
+    
+    <svg class="cloud cloud-2" viewBox="0 0 100 40">
+      <path fill="currentColor" d="M10,30 C5,30 0,25 0,20 C0,15 5,10 10,10 C15,0 25,0 30,10 C35,5 45,5 50,10 C55,5 65,5 70,10 C75,0 85,0 90,10 C95,10 100,15 100,20 C100,25 95,30 90,30 Z"/>
+    </svg>
+
+    <svg class="birds" viewBox="0 0 200 100">
+      <!-- Burung pertama -->
+      <path fill="currentColor" d="M20,40 C25,35 30,35 35,40 L40,35 L45,40 C50,35 55,35 60,40 Z" />
+      <!-- Burung kedua -->
+      <path fill="currentColor" d="M80,30 C85,25 90,25 95,30 L100,25 L105,30 C110,25 115,25 120,30 Z" />
+      <!-- Burung ketiga -->
+      <path fill="currentColor" d="M140,50 C145,45 150,45 155,50 L160,45 L165,50 C170,45 175,45 180,50 Z" />
+    </svg>
+  </div>
 
   <script>
     // Seluruh JavaScript dari kode sebelumnya (tidak ada perubahan fungsionalitas)
@@ -579,5 +887,24 @@
       });
     });
   </script>
+
+  <!-- Tambahkan elemen ornamen setelah tag body -->
+<div class="side-ornament">
+    <div class="ornament-motif"></div>
+    <div class="ornament-line"></div>
+    <div class="ornament-motif"></div>
+</div>
+
+<!-- Ganti struktur frame dengan yang baru -->
+<div class="floral-frame">
+    <div class="frame-border"></div>
+    <div class="corner-ornament top-left"></div>
+    <div class="corner-ornament top-right"></div>
+    <div class="corner-ornament bottom-left"></div>
+    <div class="corner-ornament bottom-right"></div>
+    <div class="side-pattern left-pattern"></div>
+    <div class="side-pattern right-pattern"></div>
+</div>
+
 </body>
 </html>
