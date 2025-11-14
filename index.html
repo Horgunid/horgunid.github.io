@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Undangan Pernikahan Dilla & Aldi</title>
+  <title>Undangan Pernikahan Aldi & Dilla</title>
   
   <!-- Google Fonts (Tetap sama, karena cocok) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,11 +23,11 @@
       /* WARNA BARU SESUAI UNDANGAN FISIK */
       --bg-color: #4a1d2e; /* Maroon Gelap */
       --text-color: #f0e6d2; /* Krem terang untuk teks */
-      --accent-gold: #c8a464; /* Emas untuk judul dan aksen */
+      --accent-gold: #c9aa5f; /* sedikit hangatkan emas */
       --card-bg: #5c243a; /* Warna solid Maroon (sedikit lebih terang) */
       --border-color: rgba(200,164,100,0.3);
       --card-alt-bg: #5c243a; /* Samakan agar konsisten */
-
+      --vignette: rgba(0,0,0,0.35);
     }
     
     * {
@@ -48,7 +48,10 @@
       overflow-x: hidden;
       overflow-y: hidden;
       /* Menambahkan tekstur halus pada background */
-      /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a1d2e"/><path d="M11 11L89 89M89 11L11 89" stroke="%235c243a" stroke-width="0.5"/></svg>'); */
+      background-image:
+        radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.00) 40%),
+        linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.06));
+      background-blend-mode: overlay;
     }
     
     /* Ganti ornamen batik dengan yang lebih elegan */
@@ -113,7 +116,7 @@
       margin: 0 auto;
       padding: 1rem;
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     /* Kelopak bunga tidak cocok, kita sembunyikan */
@@ -331,9 +334,10 @@
 }
 
 .hero-content .date {
-    font-size: 1.1rem;
-    color: var(--text-color);
     margin-top: 1rem;
+    font-size: 1rem;
+    color: rgba(240,230,210,0.95);
+    line-height: 1.7;
 }
 
 /* Tambah ornamen di section quotes */
@@ -396,16 +400,28 @@
 
     /* Detail Card */
     .detail-card {
-      text-align: center; padding: 2rem 1.5rem; border-radius: 10px;
-      background: var(--card-alt-bg);
-      transition: all 0.4s ease; cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.6rem;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(92,36,58,0.9), rgba(92,36,58,0.82));
+      border: 1px solid rgba(200,164,100,0.08);
+      transition: transform .28s ease, box-shadow .28s ease;
     }
-    .detail-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
-    .detail-card i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem; }
-    .detail-title {
-      font-family: var(--primary-font); font-size: 1.3rem; margin-bottom: 0.5rem;
-      font-weight: 600; color: var(--accent-gold);
+    .detail-card:hover { transform: translateY(-8px); box-shadow: 0 18px 50px rgba(0,0,0,0.45); }
+    .detail-card i {
+      display: inline-flex;
+      width: 72px; height: 72px;
+      align-items: center; justify-content: center;
+      border-radius: 50%;
+      background: rgba(200,164,100,0.09);
+      color: var(--accent-gold);
+      font-size: 1.6rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
     }
+    .detail-card small { display: block; color: rgba(240,230,210,0.75); font-size: 0.9rem; margin-top: 0.25rem; }
 
     /* Countdown */
     .countdown-timer .timer-unit {
@@ -431,7 +447,28 @@
     .gallery-item img { border: 2px solid var(--border-color); }
     
     /* Footer */
-    .footer { color: var(--text-color); opacity: 0.8; }
+    .footer { color: var(--text-color); opacity: 0.8; padding: 2.5rem 1rem; background: transparent; }
+
+    /* Footer (centering fix) */
+    .footer {
+      text-align: center;
+      position: relative; /* supaya z-index berfungsi */
+      z-index: 3;         /* pastikan di atas ornamen/frame */
+      padding: 3rem 1rem; /* beri ruang agar tidak terlalu mepet */
+      display: block;
+      width: 100%;
+    }
+    .footer p {
+      margin: 0 0 1rem 0;
+      text-align: center;
+      color: var(--text-color);
+    }
+    .footer .couple-names {
+      display: inline-block; /* agar lebar sesuai konten dan bisa margin auto */
+      margin: 0 auto;
+      text-align: center;
+      font-size: 2rem !important; /* override inline style jika ada */
+    }
 
     /* Tombol Musik */
     .music-control {
@@ -492,7 +529,8 @@
   width: 100%;
   height: 100vh;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
+  opacity: 0.06;
 }
 
 .cloud {
@@ -564,7 +602,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
 }
 
 .frame-border {
@@ -574,10 +612,12 @@
     right: 40px;
     bottom: 40px;
     border: 1px solid var(--accent-gold);
-    opacity: 0.2;
+    opacity: 0.08; /* lebih subtle */
     pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25) inset;
 }
 
+/* Ornamen pojok */
 .corner-ornament {
     position: absolute;
     width: 120px;
@@ -585,6 +625,7 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,0 L100,0 L100,10 C60,10 10,60 10,100 L0,100 Z' fill='%23c8a464' fill-opacity='0.2'/%3E%3Cpath d='M20,0 L80,0 C80,40 40,80 0,80 L0,20 Z' fill='%23c8a464' fill-opacity='0.1'/%3E%3C/svg%3E");
     background-size: contain;
     background-repeat: no-repeat;
+    opacity: 0.10;
 }
 
 .top-left {
@@ -628,6 +669,125 @@
     transform: scaleX(-1);
 }
 
+/* ======= Perubahan CSS: estetika, tipografi, frame lembut, cards & countdown ======= */
+:root {
+  --accent-gold: #c9aa5f; /* sedikit hangatkan emas */
+  --vignette: rgba(0,0,0,0.35);
+}
+
+/* Latar lebih halus: tekstur + vignette */
+body {
+  background-image:
+    radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.00) 40%),
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.06));
+  background-blend-mode: overlay;
+}
+
+/* Pastikan konten tampil di atas ornamen */
+.container { z-index: 3; }
+
+/* Ringankan frame/ornamen agar tidak mengganggu */
+.frame-border {
+    border-width: 1px;
+    opacity: 0.08; /* lebih subtle */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25) inset;
+}
+
+/* Ornamen pojok lebih halus, di belakang konten */
+.floral-frame { z-index: 0; }
+.corner-ornament { opacity: 0.10; }
+
+/* Ambient animations lebih subtle */
+.ambient-animations { opacity: 0.06; pointer-events: none; }
+
+/* HERO: tipografi fokus, spacing, subtle text-shadow */
+.hero-content {
+  max-width: 760px; /* lebar sedikit lebih besar */
+  padding: 4.5rem 3rem;
+}
+.hero-content .couple-names {
+  font-size: clamp(3rem, 9vw, 5.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--accent-gold);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  line-height: 1.02;
+  margin-bottom: 0.6rem;
+}
+.hero-content .subtitle {
+  letter-spacing: 6px;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+  color: rgba(200,164,100,0.92);
+}
+.hero-content .date {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: rgba(240,230,210,0.95);
+  line-height: 1.7;
+}
+
+/* Detail card: clean, ikon dalam lingkaran, spacing rapi */
+.detail-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.6rem;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(92,36,58,0.9), rgba(92,36,58,0.82));
+  border: 1px solid rgba(200,164,100,0.08);
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+.detail-card:hover { transform: translateY(-8px); box-shadow: 0 18px 50px rgba(0,0,0,0.45); }
+.detail-card i {
+  display: inline-flex;
+  width: 72px; height: 72px;
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(200,164,100,0.09);
+  color: var(--accent-gold);
+  font-size: 1.6rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+.detail-card small { display: block; color: rgba(240,230,210,0.75); font-size: 0.9rem; margin-top: 0.25rem; }
+
+/* Hover lebih lembut */
+.detail-card:hover { transform: translateY(-8px); box-shadow: 0 18px 50px rgba(0,0,0,0.45); }
+
+/* Countdown card: angka lebih besar dan elegan */
+.invitation-card {
+  padding: 2rem;
+}
+.countdown-timer { gap: 1rem; }
+.timer-unit {
+  min-width: 86px;
+  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(92,36,58,0.95), rgba(76,28,44,0.9));
+  border: 1px solid rgba(200,164,100,0.06);
+}
+.timer-value {
+  font-family: var(--primary-font);
+  font-size: 2.0rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+.timer-label { font-size: 0.85rem; color: rgba(240,230,210,0.85); margin-top: 6px; }
+
+/* Footer: lebih ringkas */
+.footer { padding: 2.5rem 1rem; background: transparent; }
+
+/* Kurangi dominasi dekor di mobile, perbaiki spacing */
+@media (max-width: 600px) {
+  .hero-content { padding: 2.2rem; }
+  .hero-content .couple-names { font-size: 2.2rem; }
+  .detail-card i { width: 56px; height: 56px; font-size: 1.25rem; }
+  .timer-value { font-size: 1.4rem; }
+  .frame-border { top: 20px; left: 12px; right: 12px; bottom: 12px; }
+}
+
+/* ...existing code... */
   </style>
 </head>
 <body>
@@ -638,7 +798,7 @@
   <div id="cover">
     <div class="cover-content">
       <img src="joglo.png" alt="Traditional Javanese House">
-      <h1>Dilla & Aldi</h1>
+      <h1>Aldi & Dilla </h1>
       <div id="guestNameToOpen">
         <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
         <span>Tamu Undangan</span>
@@ -680,8 +840,11 @@
     <div class="hero-content">
         <div class="ornament"></div>
         <p class="subtitle">The Wedding Of</p>
-        <h1 class="couple-names">Dilla & Aldi</h1>
-        <p class="date">Sabtu, 20 Desember 2025</p>
+        <h1 class="couple-names">Aldi & Dilla</h1>
+        <p class="date">
+          Akad &amp; Resepsi (Rumah Pihak Wanita): Sabtu, 20 Desember 2025<br>
+          Ngunduh Mantu (Rumah Pihak Pria): Sabtu, 27 Desember 2025
+        </p>
     </div>
 </section>
 
@@ -690,23 +853,37 @@
         <p class="message">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."<br><strong>(QS. Ar-Rum: 21)</strong></p>
         <div class="floral-divider"></div>
         <div class="couple-details">
-            <div><h2>Aldiansyah</h2><p>Putra dari Bapak Japar & Ibu Marmi</p></div>
+            <div><h2>Aldi Nugroho</h2><p>Putra dari Bapak Dedi Supriadi & Ibu Nuningsih</p></div>
             <div class="ampersand">&</div>
-            <div><h2>Dilla Amelia</h2><p>Putri dari Bapak Fulan & Ibu Fulanah</p></div>
+            <div><h2>Nurul Adilla</h2><p>Putri dari Bapak Japar & Ibu Marmi</p></div>
         </div>
       </section>
 
       <section class="event-section hidden-for-animation">
-        <h2 class="section-title">Save the Date</h2>
-        <div class="event-details">
-          <div class="detail-card"><i class="far fa-calendar-alt"></i><div class="detail-title">Akad & Resepsi</div><p>Sabtu, 20 Desember 2025</p><p>Pukul 10.00 WIB - Selesai</p></div>
-          <div class="detail-card" onclick="window.open('https://maps.app.goo.gl/KVEAfe1nf39zD9Fw7', '_blank')"><i class="fas fa-map-marker-alt"></i><div class="detail-title">Lokasi Acara</div><p>Gg Pendidikan No. 270<br>Rumah Bapak Japar</p></div>
-        </div>
-      </section>
+  <h2 class="section-title">Jadwal Acara</h2>
+  <div class="event-details">
+    <div class="detail-card" onclick="window.open('https://maps.app.goo.gl/KVEAfe1nf39zD9Fw7', '_blank')">
+      <i class="far fa-calendar-alt"></i>
+      <div class="detail-title">Akad &amp; Resepsi</div>
+      <p>Sabtu, 20 Desember 2025</p>
+      <p>Rumah Pihak Wanita</p>
+      <small>Alamat: Jl. Pendidikan No.23, Tj. Morawa B, Kec. Tj. Morawa</small>
+    </div>
+
+    <div class="detail-card" onclick="window.open('https://maps.app.goo.gl/d2tFKMYEPWkesasC7', '_blank')">
+      <i class="fas fa-calendar-alt"></i>
+      <div class="detail-title">Ngunduh Mantu</div>
+      <p>Sabtu, 27 Desember 2025</p>
+      <p>Rumah Pihak Pria</p>
+      <small>Alamat: Perumahan Staf PT SA, Nanjak Makmur, Tapung Hilir</small>
+    </div>
+  </div>
+</section>
 
       <section class="countdown-section hidden-for-animation">
         <div class="invitation-card">
           <h2 class="section-title" style="margin-top:0;">Menuju Hari Bahagia</h2>
+          <h3 id="countdownEventName" style="margin:0 0 1rem 0; font-family:var(--primary-font); color:var(--accent-gold); font-size:1.25rem;">—</h3>
           <div class="countdown-timer">
             <div class="timer-unit"><div class="timer-value" id="days">00</div><div class="timer-label">Hari</div></div>
             <div class="timer-unit"><div class="timer-value" id="hours">00</div><div class="timer-label">Jam</div></div>
@@ -731,9 +908,13 @@
       <section class="gift-section hidden-for-animation">
         <h2 class="section-title">Kado Digital</h2>
         <div class="gift-card">
-          <i class="fas fa-gift"></i><p>Doa restu Anda adalah karunia terindah. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara digital.</p>
+          <i class="fas fa-gift"></i>
+          <p>Doa dan restu Anda adalah karunia terindah bagi kami. Apabila berkenan memberi kado secara digital, silakan transfer ke rekening berikut:</p>
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia_logo.svg/2560px-Bank_Central_Asia_logo.svg.png" alt="Bank Logo" class="bank-logo">
-          <p class="account-number" id="accountNumber">1234567890</p><p>a.n. Aldiansyah</p>
+          <div class="account-info">
+            <p class="account-number" id="accountNumber">1234567890</p>
+            <p class="account-name">a.n. Aldiansyah</p>
+          </div>
           <button class="copy-button" id="copyButton"><i class="far fa-copy"></i> Salin No. Rekening</button>
         </div>
       </section>
@@ -742,18 +923,18 @@
         <div class="invitation-card">
             <h2 class="section-title" style="margin-top:0;">Konfirmasi Kehadiran</h2>
             <p>Merupakan suatu kehormatan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu.</p>
-            <button class="rsvp-button" id="rsvpButton"><i class="far fa-calendar-check"></i> RSVP</button>
+            <button class="rsvp-button" id="rsvpButton"><i class="far fa-calendar-check"></i> </button>
         </div>
       </section>
       
       <footer class="footer hidden-for-animation">
         <p>Terima kasih atas doa dan restu Anda.</p>
-        <h2 class="couple-names" style="font-size: 2rem;">Dilla & Aldi</h2>
+        <h2 class="couple-names" style="font-size: 2rem;">Aldi & Dilla </h2>
       </footer>
     </div>
   </main>
 
-  <audio id="backgroundMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"></audio>
+  <audio id="backgroundMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
   <div class="ambient-animations">
     <svg class="cloud cloud-1" viewBox="0 0 100 40">
@@ -809,20 +990,52 @@
         }
       });
 
-      const weddingDate = new Date("December 20, 2025 10:00:00").getTime();
-      const countdownInterval = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
-        if(distance < 0) {
-            clearInterval(countdownInterval);
-            document.getElementById("days").innerText = "00";
-            return;
-        }
-        document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-        document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-      }, 1000);
+      // Daftar acara (urutkan berdasarkan tanggal)
+  const eventsList = [
+    { name: "Akad & Resepsi (Rumah Pihak Wanita)", date: new Date("December 20, 2025 10:00:00") },
+    { name: "Ngunduh Mantù (Rumah Pihak Pria)", date: new Date("December 27, 2025 10:00:00") }
+  ];
+
+  function getNextEvent() {
+    const now = new Date().getTime();
+    for (let ev of eventsList) {
+      if (ev.date.getTime() > now) return ev;
+    }
+    return null;
+  }
+
+  // Update countdown setiap detik, menyesuaikan event berikutnya
+  const countdownInterval = setInterval(function() {
+    const nextEvent = getNextEvent();
+    const nameEl = document.getElementById("countdownEventName");
+    if (!nextEvent) {
+      clearInterval(countdownInterval);
+      nameEl.textContent = "Semua acara telah berlangsung";
+      document.getElementById("days").innerText = "00";
+      document.getElementById("hours").innerText = "00";
+      document.getElementById("minutes").innerText = "00";
+      document.getElementById("seconds").innerText = "00";
+      return;
+    }
+
+    nameEl.textContent = nextEvent.name;
+
+    const now = new Date().getTime();
+    const distance = nextEvent.date.getTime() - now;
+    if (distance < 0) {
+      // Bila acara sudah lewat, loop akan memilih event berikutnya pada interval selanjutnya
+      document.getElementById("days").innerText = "00";
+      document.getElementById("hours").innerText = "00";
+      document.getElementById("minutes").innerText = "00";
+      document.getElementById("seconds").innerText = "00";
+      return;
+    }
+
+    document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+    document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+    document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+    document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+  }, 1000);
 
       function observeSections() {
         const sections = document.querySelectorAll('.hidden-for-animation');
