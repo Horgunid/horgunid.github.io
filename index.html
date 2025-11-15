@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- disable zooming on most browsers -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <title>Undangan Pernikahan Aldi & Dilla</title>
 
   <!-- Google Fonts (Tetap sama, karena cocok) -->
@@ -474,663 +475,6 @@
     }
 
     /* Detail Card */
-    .detail-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1.6rem;
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(92, 36, 58, 0.9), rgba(92, 36, 58, 0.82));
-      border: 1px solid rgba(200, 164, 100, 0.08);
-      transition: transform .28s ease, box-shadow .28s ease;
-    }
-
-    .detail-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
-    }
-
-    .detail-card i {
-      display: inline-flex;
-      width: 72px;
-      height: 72px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(200, 164, 100, 0.09);
-      color: var(--accent-gold);
-      font-size: 1.6rem;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    .detail-card small {
-      display: block;
-      color: rgba(240, 230, 210, 0.75);
-      font-size: 0.9rem;
-      margin-top: 0.25rem;
-    }
-
-    /* Countdown */
-    .countdown-timer .timer-unit {
-      background: var(--card-alt-bg);
-    }
-
-    .timer-value {
-      color: var(--accent-gold);
-    }
-
-    .timer-label {
-      color: var(--text-color);
-      opacity: 0.8;
-    }
-
-    /* Tombol RSVP & Salin */
-    .rsvp-button,
-    .copy-button {
-      background: var(--accent-gold);
-      color: var(--bg-color);
-      /* Teks di tombol menjadi warna maroon */
-      font-weight: 500;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      animation: none;
-      /* Hapus animasi pulse */
-      border-radius: 999px;
-      padding: 10px 26px;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s;
-    }
-
-    .rsvp-button:active,
-    .copy-button:active {
-      transform: translateY(1px) scale(.998);
-    }
-
-    .rsvp-button:focus,
-    .copy-button:focus {
-      outline: 2px solid rgba(200, 164, 100, 0.18);
-      outline-offset: 3px;
-    }
-
-    .rsvp-button:hover,
-    .copy-button:hover {
-      background: var(--text-color);
-      color: var(--bg-color);
-    }
-
-    /* Gallery */
-    .gallery-item img {
-      border: 2px solid var(--border-color);
-    }
-
-    /* Footer */
-    .footer {
-      color: var(--text-color);
-      opacity: 0.8;
-      padding: 2.5rem 1rem;
-      background: transparent;
-    }
-
-    /* Footer (centering fix) */
-    .footer {
-      text-align: center;
-      position: relative;
-      /* supaya z-index berfungsi */
-      z-index: 3;
-      /* pastikan di atas ornamen/frame */
-      padding: 3rem 1rem;
-      /* beri ruang agar tidak terlalu mepet */
-      display: block;
-      width: 100%;
-    }
-
-    .footer p {
-      margin: 0 0 1rem 0;
-      text-align: center;
-      color: var(--text-color);
-    }
-
-    .footer .couple-names {
-      display: inline-block;
-      /* agar lebar sesuai konten dan bisa margin auto */
-      margin: 0 auto;
-      text-align: center;
-      font-size: 2rem !important;
-      /* override inline style jika ada */
-    }
-
-    /* Tombol Musik */
-    .music-control {
-      bottom: 20px;
-      right: 20px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      color: var(--text-color);
-    }
-
-    .music-control.playing i.fa-music {
-      display: none;
-    }
-
-    .music-control.playing i.fa-pause {
-      display: inline-block;
-    }
-
-    .music-control:not(.playing) i.fa-music {
-      display: inline-block;
-    }
-
-    .music-control:not(.playing) i.fa-pause {
-      display: none;
-    }
-
-    /* ======================================================= */
-    /*                  AKHIR PERUBAHAN THEME                  */
-    /* ======================================================= */
-
-    /* Sisanya adalah kode styling fungsional yang tidak perlu diubah */
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .event-details {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
-    .countdown-timer {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      text-align: center;
-    }
-
-    .timer-unit {
-      border-radius: 8px;
-      padding: 1rem;
-      min-width: 70px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-    #lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #lightbox img {
-      max-width: 90%;
-      max-height: 85%;
-    }
-
-    #lightbox.active {
-      display: flex;
-    }
-
-    .gift-card {
-      background: var(--card-alt-bg);
-      padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .gift-card i {
-      font-size: 2.5rem;
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
-
-    .bank-logo {
-      height: 25px;
-      margin-bottom: 1rem;
-      filter: brightness(0) invert(1);
-      opacity: 0.8;
-    }
-
-    .account-number {
-      font-size: 1.2rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-    }
-
-    .copy-button {
-      border: none;
-      padding: 10px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-    }
-
-    .rsvp-button {
-      display: inline-block;
-      width: auto;
-      padding: 14px 40px;
-      margin-top: 2rem;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: #5c243a;
-      padding: 2.5rem;
-      border-radius: 15px;
-      max-width: 500px;
-      width: 90%;
-      position: relative;
-      border: 1px solid var(--border-color);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: var(--accent-gold);
-    }
-
-    .modal-title {
-      font-family: var(--primary-font);
-      text-align: center;
-      margin-bottom: 1.5rem;
-      color: var(--accent-gold);
-      font-size: 1.8rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      font-family: var(--secondary-font);
-      font-size: 1rem;
-      background: var(--card-bg);
-      color: var(--text-color);
-    }
-
-    .attendance-options {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .attendance-option {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .attendance-circle {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      background: var(--card-bg);
-      border: 2px solid var(--border-color);
-      transition: all 0.3s ease;
-    }
-
-    .attendance-circle i {
-      font-size: 1.8rem;
-      color: var(--accent-gold);
-    }
-
-    .attendance-option.selected .attendance-circle {
-      background: var(--accent-gold);
-      border-color: var(--accent-gold);
-    }
-
-    .attendance-option.selected i {
-      color: var(--bg-color);
-    }
-
-    .submit-btn {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      background: var(--accent-gold);
-      color: var(--bg-color);
-      font-weight: 500;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .success-message {
-      text-align: center;
-      padding: 2rem;
-      display: none;
-    }
-
-    .success-message i {
-      font-size: 4rem;
-      color: #76c893;
-      margin-bottom: 1.5rem;
-    }
-
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(200, 164, 100, 0.2);
-      border-top: 5px solid var(--accent-gold);
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .music-control {
-      position: fixed;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 100;
-      transition: all 0.4s ease;
-    }
-
-    /* Update style animasi ambient */
-    .ambient-animations {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.06;
-    }
-
-    .cloud {
-      position: absolute;
-      opacity: 0.15;
-      filter: contrast(0.8);
-      color: var(--accent-gold);
-    }
-
-    .cloud-1 {
-      width: 280px;
-      /* Jauh lebih besar */
-      height: 100px;
-      top: 15%;
-      animation: floatCloud 60s linear infinite;
-    }
-
-    .cloud-2 {
-      width: 220px;
-      /* Jauh lebih besar */
-      height: 80px;
-      top: 35%;
-      animation: floatCloud 45s linear infinite;
-      animation-delay: -20s;
-    }
-
-    .birds {
-      position: absolute;
-      width: 200px;
-      /* Lebih besar */
-      height: 100px;
-      top: 25%;
-      left: -200px;
-      animation: flyBirds 30s linear infinite;
-      opacity: 0.2;
-      color: var(--accent-gold);
-    }
-
-    @keyframes floatCloud {
-      from {
-        left: -300px;
-        transform: translateX(0) translateY(0);
-      }
-
-      50% {
-        transform: translateX(100px) translateY(20px);
-      }
-
-      to {
-        left: 100%;
-        transform: translateX(0) translateY(0);
-      }
-    }
-
-    @keyframes flyBirds {
-      from {
-        left: -200px;
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(-50px) scale(1.2);
-      }
-
-      to {
-        left: 100%;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Ganti frame bunga dengan motif batik yang lebih elegan */
-    .floral-frame {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .frame-border {
-      position: fixed;
-      top: 40px;
-      left: 40px;
-      right: 40px;
-      bottom: 40px;
-      border: 1px solid var(--accent-gold);
-      opacity: 0.08;
-      /* lebih subtle */
-      pointer-events: none;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) inset;
-    }
-
-    /* Ornamen pojok */
-    .corner-ornament {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0,0 L100,0 L100,10 C60,10 10,60 10,100 L0,100 Z' fill='%23c8a464' fill-opacity='0.2'/%3E%3Cpath d='M20,0 L80,0 C80,40 40,80 0,80 L0,20 Z' fill='%23c8a464' fill-opacity='0.1'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.10;
-    }
-
-    .top-left {
-      top: 20px;
-      left: 20px;
-    }
-
-    .top-right {
-      top: 20px;
-      right: 20px;
-      transform: rotate(90deg);
-    }
-
-    .bottom-left {
-      bottom: 20px;
-      left: 20px;
-      transform: rotate(-90deg);
-    }
-
-    .bottom-right {
-      bottom: 20px;
-      right: 20px;
-      transform: rotate(180deg);
-    }
-
-    .side-pattern {
-      position: fixed;
-      width: 30px;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 100'%3E%3Cpath d='M10,0 Q20,50 10,100 M0,0 Q10,50 0,100' stroke='%23c8a464' stroke-width='0.5' fill='none' opacity='0.2'/%3E%3C/svg%3E");
-      background-repeat: repeat-y;
-      opacity: 0.15;
-    }
-
-    .left-pattern {
-      left: 20px;
-    }
-
-    .right-pattern {
-      right: 20px;
-      transform: scaleX(-1);
-    }
-
-    /* ======= Perubahan CSS: estetika, tipografi, frame lembut, cards & countdown ======= */
-    :root {
-      --accent-gold: #c8a468;
-      /* konsistenkan sedikit lebih netral */
-      --vignette: rgba(0, 0, 0, 0.35);
-    }
-
-    /* Latar lebih halus: tekstur + vignette */
-    body {
-      background-image:
-        radial-gradient(ellipse at center, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.00) 40%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.06));
-      background-blend-mode: overlay;
-    }
-
-    /* Pastikan konten tampil di atas ornamen */
-    .container {
-      z-index: 3;
-    }
-
-    /* Ringankan frame/ornamen agar tidak mengganggu */
-    .frame-border {
-      border-width: 1px;
-      opacity: 0.06;
-      /* lebih subtle */
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) inset;
-    }
-
-    /* Ornamen pojok lebih halus, di belakang konten */
-    .floral-frame {
-      z-index: 0;
-    }
-
-    .corner-ornament {
-      opacity: 0.08;
-      filter: blur(0.2px);
-    }
-
-    /* Ambient animations lebih subtle */
-    .ambient-animations {
-      opacity: 0.06;
-      pointer-events: none;
-    }
-
-    /* HERO: tipografi fokus, spacing, subtle text-shadow */
-    .hero-content {
-      max-width: 760px;
-      /* lebar sedikit lebih besar */
-      padding: 4.5rem 3rem;
-    }
-
-    .hero-content .couple-names {
-      font-size: clamp(3rem, 9vw, 5.2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--accent-gold);
-      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-      line-height: 1.02;
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-content .subtitle {
-      letter-spacing: 6px;
-      font-weight: 400;
-      margin-bottom: 0.6rem;
-      color: rgba(200, 164, 100, 0.92);
-    }
-
-    .hero-content .date {
-      margin-top: 1rem;
-      font-size: 1rem;
-      color: rgba(240, 230, 210, 0.95);
-      line-height: 1.7;
-    }
-
-    /* Detail card: clean, ikon dalam lingkaran, spacing rapi */
     .detail-card {
       display: flex;
       flex-direction: column;
@@ -3632,6 +2976,69 @@
       .couple-portraits figcaption { font-size: 0.95rem; }
     }
 
+    /* ===== Improve bank logo sizing & visibility (added) ===== */
+    .gift-card .bank-logo {
+	/* allow natural width, but constrain maximums for neat layout */
+	display: block;
+	width: auto;
+	max-width: 240px;
+	max-height: 64px;
+	height: auto;
+	margin: 0.6rem auto;
+	filter: none; /* avoid aggressive inversion that can hide the logo */
+	opacity: 0.98;
+	object-fit: contain;
+    }
+
+    /* Responsive overrides so logo remains visible on smaller screens */
+    @media (max-width: 600px) {
+	.gift-card .bank-logo {
+	  max-width: 180px;
+	  max-height: 56px;
+	}
+    }
+    @media (max-width: 480px) {
+	.gift-card .bank-logo {
+	  max-width: 160px;
+	  max-height: 48px;
+	}
+    }
+    @media (max-width: 360px) {
+	.gift-card .bank-logo {
+	  max-width: 140px;
+	  max-height: 44px;
+	}
+    }
+
+  /* Prevent pinch/zoom & ensure solids touch behaviour */
+    html, body {
+      touch-action: pan-y;
+      -ms-touch-action: pan-y;
+    }
+
+    /* Center cards and constrain width so they appear centered on all devices */
+    .invitation-card,
+    .gift-card {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      max-width: 760px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Make event grid items center horizontally */
+    .event-details {
+      justify-items: center; /* centers grid children */
+    }
+    .event-details .detail-card {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Ensure gallery items don't overflow and stay centered */
+    .gallery-grid { justify-items: center; }
   </style>
 </head>
 
@@ -3712,8 +3119,8 @@
           <p class="subtitle">The Wedding Of</p>
           <h1 class="couple-names">Aldi & Dilla</h1>
           <p class="date">
-            Akad &amp; Resepsi (Rumah Pihak Wanita): Sabtu, 20 Desember 2025<br>
-            Ngunduh Mantu (Rumah Pihak Pria): Sabtu, 27 Desember 2025
+            Akad &amp; Resepsi (Pihak Wanita): <br>Sabtu, 20 Desember 2025<br>
+            Ngunduh Mantu (Pihak Pria): <br>Sabtu, 27 Desember 2025
           </p>
         </div>
       </section>
@@ -3757,7 +3164,7 @@
             <i class="far fa-calendar-alt"></i>
             <div class="detail-title">Akad &amp; Resepsi</div>
             <p>Sabtu, 20 Desember 2025</p>
-            <p>Rumah Pihak Wanita</p>
+            <p>Pihak Wanita</p>
             <small>Alamat: Jl. Pendidikan No.23, Tj. Morawa B, Kec. Tj. Morawa</small>
           </div>
 
@@ -3765,7 +3172,7 @@
             <i class="fas fa-calendar-alt"></i>
             <div class="detail-title">Ngunduh Mantu</div>
             <p>Sabtu, 27 Desember 2025</p>
-            <p>Rumah Pihak Pria</p>
+            <p>Pihak Pria</p>
             <small>Alamat: Perumahan Staf PT SA, Nanjak Makmur, Tapung Hilir</small>
           </div>
         </div>
@@ -4273,6 +3680,49 @@
         });
       }
     });
+
+
+    /* ===== PROTECTION SCRIPT: Disable context menu, hotkeys, and prevent zoom ===== */
+    (function protectPage() {
+      // disable right-click context menu
+      window.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+
+      // prevent common devtools hotkeys
+      window.addEventListener('keydown', function(e) {
+        // F12, Ctrl+Shift+I/J/C, Ctrl+U
+        const key = e.key || e.keyCode;
+        if (key === 'F12' || key === 123 ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+            (e.ctrlKey && (e.key === 'U' || e.key === 'u'))) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        // prevent Ctrl/Cmd + +/- zoom
+        if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, { capture: true });
+
+      // prevent pinch-to-zoom (touchstart with more than one touch)
+      document.addEventListener('touchstart', function(e){
+        if (e.touches && e.touches.length > 1) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      // iOS gesturestart
+      document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+
+      // prevent ctrl + mousewheel zoom
+      window.addEventListener('wheel', function(e){
+        if (e.ctrlKey) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+    })();
   </script>
 
   <!-- Tambahkan elemen ornamen setelah tag body -->
